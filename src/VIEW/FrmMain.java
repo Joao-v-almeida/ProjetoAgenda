@@ -2,6 +2,8 @@ package VIEW;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class FrmMain extends JFrame {
     private JPanel panelPrincipal;
@@ -20,5 +22,24 @@ public class FrmMain extends JFrame {
 
         //Comportamento ao Fechar o sistema.
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        //Escutando (prestando atenção)
+        setListeners();
+    }
+
+    private void setListeners() {
+        btnContato.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new FrmContato();
+                dispose();
+            }
+        });
+        btnRemover.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 }
