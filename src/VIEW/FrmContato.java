@@ -1,5 +1,7 @@
 package VIEW;
 
+import BUSINESS.BusinessContato;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,11 +15,14 @@ public class FrmContato extends JFrame {
     private JPanel panelBotao;
     private JButton btnSalvar;
     private JButton btnCancelar;
+    private BusinessContato mBusinessContato;
 
     public FrmContato() {
         setContentPane(panelPrincipal);
         setSize(500, 250);
         setVisible(true);
+
+        mBusinessContato = new BusinessContato();
 
         //Centralizar o Form.
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -41,6 +46,16 @@ public class FrmContato extends JFrame {
         btnSalvar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    String nome = txtNome.getText();
+                    String telefone = txtTelefone.getText();
+
+                    mBusinessContato.salvar(nome, telefone);
+                    new FrmMain();
+                    dispose();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(), "Atenção!",1);
+                }
 
             }
         });
