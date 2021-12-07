@@ -4,6 +4,8 @@ import BUSINESS.BusinessContato;
 import ENTIDADE.EntidadeContato;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,6 +19,8 @@ public class FrmMain extends JFrame {
     private JTable tbContato;
     private JLabel lblContadorContatos;
     private BusinessContato mBusinessContato;
+    private String mNome = "";
+    private String mTelefone = "";
 
     public FrmMain() {
         setContentPane(panelPrincipal);
@@ -64,10 +68,30 @@ public class FrmMain extends JFrame {
                 dispose();
             }
         });
+
+        tbContato.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (e.getValueIsAdjusting()) {
+                    if (tbContato.getSelectedRow() != -1) {
+                        mNome = tbContato.getValueAt(tbContato.getSelectedRow(), 0).toString();
+                        mTelefone = tbContato.getValueAt(tbContato.getSelectedRow(), 1).toString();
+                    }
+                }
+            }
+        });
         btnRemover.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    mBusinessContato.remover(mNome, mTelefone);
+                    carregarContatos();
 
+                    mNome = "";
+                    mTelefone = "";
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(new JFrame(), ex.getMessage(),"Atenção!",  1);
+                }
             }
         });
     }
