@@ -14,5 +14,9 @@ class RepositorioContato {
         fun deletar(contato: EntidadeContato) {
 
         }
+
+        fun getList(): List<EntidadeContato> {
+            return listaContatos
+        }
     }
 }

@@ -1,20 +1,27 @@
 package VIEW;
 
+import BUSINESS.BusinessContato;
+import ENTIDADE.EntidadeContato;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class FrmMain extends JFrame {
     private JPanel panelPrincipal;
     private JButton btnContato;
     private JButton btnRemover;
     private JTable tbContato;
+    private BusinessContato mBusinessContato;
 
     public FrmMain() {
         setContentPane(panelPrincipal);
         setSize(500, 250);
         setVisible(true);
+
+        mBusinessContato = new BusinessContato();
 
         //Centralizar o Form.
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -25,6 +32,12 @@ public class FrmMain extends JFrame {
 
         //Escutando (prestando atenção)
         setListeners();
+        carregarContatos();
+
+    }
+
+    private void carregarContatos() {
+        List<EntidadeContato> listaContato = mBusinessContato.getList();
     }
 
     private void setListeners() {

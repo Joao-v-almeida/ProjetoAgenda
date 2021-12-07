@@ -4,7 +4,7 @@ import ENTIDADE.EntidadeContato
 import REPOSITORIO.RepositorioContato
 
 class BusinessContato {
-    fun validar(nome: String, telefone: String) {
+    private fun validar(nome: String, telefone: String) {
         if (nome == "") {
             throw Exception("Nome Obrigatório!")
         }
@@ -13,7 +13,7 @@ class BusinessContato {
         }
     }
 
-    fun validarRemover(nome: String, telefone: String) {
+    private fun validarRemover(nome: String, telefone: String) {
         if (nome == "" || telefone == "") {
             throw Exception("Necessário selecionar um contato antes de remover")
         }
@@ -32,6 +32,10 @@ class BusinessContato {
 
         val contato = EntidadeContato(nome, telefone)
         RepositorioContato.deletar(contato)
+    }
+
+    fun getList(): List<EntidadeContato> {
+        return RepositorioContato.getList()
     }
 
 }
