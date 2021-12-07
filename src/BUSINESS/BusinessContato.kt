@@ -1,5 +1,8 @@
 package BUSINESS
 
+import ENTIDADE.EntidadeContato
+import REPOSITORIO.RepositorioContato
+
 class BusinessContato {
     fun validar(nome: String, telefone: String) {
         if (nome == "") {
@@ -19,10 +22,16 @@ class BusinessContato {
     fun salvar(nome: String, telefone: String) {
         validar(nome, telefone)
 
+        val contato = EntidadeContato(nome, telefone)
+        RepositorioContato.salvar(contato)
+
     }
 
     fun remover(nome: String, telefone: String) {
         validarRemover(nome, telefone)
+
+        val contato = EntidadeContato(nome, telefone)
+        RepositorioContato.deletar(contato)
     }
 
 }
