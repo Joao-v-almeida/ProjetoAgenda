@@ -1,3 +1,5 @@
+import VIEW.FrmMain
+
 fun main() {
-    MainForm()
+    FrmMain()
 }
