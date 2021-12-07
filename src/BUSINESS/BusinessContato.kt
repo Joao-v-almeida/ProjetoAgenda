@@ -38,4 +38,13 @@ class BusinessContato {
         return RepositorioContato.getList()
     }
 
+    fun getContadorContatos(): String {
+        val list = getList()
+        return when {
+            list.isEmpty() -> "0 Contatos"
+            else -> "${list.size} contatos"
+        }
+
+    }
+
 }

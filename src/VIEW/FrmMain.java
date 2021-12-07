@@ -4,6 +4,7 @@ import BUSINESS.BusinessContato;
 import ENTIDADE.EntidadeContato;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +15,7 @@ public class FrmMain extends JFrame {
     private JButton btnContato;
     private JButton btnRemover;
     private JTable tbContato;
+    private JLabel lblContadorContatos;
     private BusinessContato mBusinessContato;
 
     public FrmMain() {
@@ -38,6 +40,20 @@ public class FrmMain extends JFrame {
 
     private void carregarContatos() {
         List<EntidadeContato> listaContato = mBusinessContato.getList();
+
+        String[] nomeColunas = {"Nome", "Telefone"};
+        DefaultTableModel model = new DefaultTableModel(new Object[0][0], nomeColunas);
+
+        for (EntidadeContato i : listaContato) {
+            Object[] o = new Object[2]; //Nome e Telefone.
+            o[0] = i.getNome();
+            o[1] = i.getTelefone();
+            model.addRow(o);
+        }
+
+        tbContato.clearSelection();
+        tbContato.setModel(model);
+        lblContadorContatos.setText(mBusinessContato.getContadorContatos());
     }
 
     private void setListeners() {
